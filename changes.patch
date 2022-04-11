@@ -1,0 +1,136 @@
+diff --git a/configs/common/CacheConfig.py b/configs/common/CacheConfig.py
+index 61c6a304d..c64526bba 100644
+--- a/configs/common/CacheConfig.py
++++ b/configs/common/CacheConfig.py
+@@ -84,7 +84,7 @@ def config_cache(options, system):
+             print("O3_ARM_v7a_3 is unavailable. Did you compile the O3 model?")
+             sys.exit(1)
+ 
+-        dcache_class, icache_class, l2_cache_class, walk_cache_class = \
++        dcache_class, icache_class, l2_cache_class, l3_cache_class, walk_cache_class = \
+             core.O3_ARM_v7a_DCache, core.O3_ARM_v7a_ICache, \
+             core.O3_ARM_v7aL2, \
+             None
+@@ -95,11 +95,11 @@ def config_cache(options, system):
+             print("HPI is unavailable.")
+             sys.exit(1)
+ 
+-        dcache_class, icache_class, l2_cache_class, walk_cache_class = \
++        dcache_class, icache_class, l2_cache_class,  l3_cache_class, walk_cache_class = \
+             core.HPI_DCache, core.HPI_ICache, core.HPI_L2, None
+     else:
+-        dcache_class, icache_class, l2_cache_class, walk_cache_class = \
+-            L1_DCache, L1_ICache, L2Cache, None
++        dcache_class, icache_class, l2_cache_class,  l3_cache_class, walk_cache_class = \
++            L1_DCache, L1_ICache, L2Cache, L3Cache, None
+ 
+         if buildEnv['TARGET_ISA'] in ['x86', 'riscv']:
+             walk_cache_class = PageTableWalkerCache
+@@ -198,6 +198,21 @@ def config_cache(options, system):
+ 
+     return system
+ 
++    #Adding L3 cache implementation below
++    if options.l2cache and options.l3cache:
++        system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain, size=options.l2_size, assoc=options.l2_assoc)
++
++        system.l3 = l3_cache_class(clk_domain=system.cpu_clk_domain, size=options.l3_size, assoc=options.l3_assoc)
++
++        system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
++        system.tol3bus = L3XBar(clk_domain = system.cpu_clk_domain)
++
++        system.l2.cpu_side = system.tol2bus.master
++        system.l2.mem_side = system.tol3bus.slave
++
++        system.l3.cpu_side = system.tol3bus.master
++        system.l3.mem_side = system.membus.slave
++
+ # ExternalSlave provides a "port", but when that port connects to a cache,
+ # the connecting CPU SimObject wants to refer to its "cpu_side".
+ # The 'ExternalCache' class provides this adaptation by rewriting the name,
+diff --git a/configs/common/Caches.py b/configs/common/Caches.py
+index 1468b953c..59b462497 100644
+--- a/configs/common/Caches.py
++++ b/configs/common/Caches.py
+@@ -71,6 +71,16 @@ class L2Cache(Cache):
+     tgts_per_mshr = 12
+     write_buffers = 8
+ 
++#L3 cache implemenation below
++class L3Cache(Cache):
++    assoc = 64
++    tag_latency = 32
++    data_latency = 32
++    response_latency = 32
++    mshrs = 32
++    tgts_per_mshr = 24
++    write_buffers = 16
++
+ class IOCache(Cache):
+     assoc = 8
+     tag_latency = 50
+diff --git a/configs/common/Options.py b/configs/common/Options.py
+index a63cc7b08..55602537e 100644
+--- a/configs/common/Options.py
++++ b/configs/common/Options.py
+@@ -141,6 +141,9 @@ def addNoISAOptions(parser):
+                         help="use external port for SystemC TLM cosimulation")
+     parser.add_argument("--caches", action="store_true")
+     parser.add_argument("--l2cache", action="store_true")
++    #L3 Cache implementation line below
++    parser.add_argument("--l3cache", action="store_true")
++    
+     parser.add_argument("--num-dirs", type=int, default=1)
+     parser.add_argument("--num-l2caches", type=int, default=1)
+     parser.add_argument("--num-l3caches", type=int, default=1)
+diff --git a/src/cpu/BaseCPU.py b/src/cpu/BaseCPU.py
+index 5eeedd364..108d66a69 100644
+--- a/src/cpu/BaseCPU.py
++++ b/src/cpu/BaseCPU.py
+@@ -48,6 +48,7 @@ from m5.util.fdthelper import *
+ 
+ from m5.objects.ClockedObject import ClockedObject
+ from m5.objects.XBar import L2XBar
++from m5.objects.XBar import L3XBar
+ from m5.objects.InstTracer import InstTracer
+ from m5.objects.CPUTracers import ExeTracer
+ from m5.objects.SubSystem import SubSystem
+@@ -234,6 +235,16 @@ class BaseCPU(ClockedObject):
+         self.toL2Bus.mem_side_ports = self.l2cache.cpu_side
+         self._cached_ports = ['l2cache.mem_side']
+ 
++        #Adding L3 cache implementation below 
++        def addThreeLevelCacheHierarchy(self, ic, dc, l2c, iwc = None, dwc = None):
++            self.addPrivateSplitL2Caches(ic, dc, iwc, dwc)
++            self.toL3Bus = L3XBar()
++            self.connectCachedPorts(self.toL3Bus)
++            self.l3cache = l3c
++            self.toL3Bus.master = self.l3cache.cpu_side
++            self._cached_ports = ['l3cache.mem_side']
++
++    
+     def createThreads(self):
+         # If no ISAs have been created, assume that the user wants the
+         # default ISA.
+diff --git a/src/mem/XBar.py b/src/mem/XBar.py
+index a424c6f01..91f0eea54 100644
+--- a/src/mem/XBar.py
++++ b/src/mem/XBar.py
+@@ -199,6 +199,17 @@ class SystemXBar(CoherentXBar):
+ # In addition to the system interconnect, we typically also have one
+ # or more on-chip I/O crossbars. Note that at some point we might want
+ # to also define an off-chip I/O crossbar such as PCIe.
++
++#Adding L3 cache implementation below
++class L3XBar(CoherentXBar):
++    #256-bit crossbar by default
++    width = 32
++    frontend_latency = 1
++    forward_latency = 0
++    response_latency = 1
++    snoop_response_latency = 1
++    snoop_filter = SnoopFilter(lookup_latency = 0)
++
+ class IOXBar(NoncoherentXBar):
+     # 128-bit crossbar by default
+     width = 16
