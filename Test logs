@@ -1,0 +1,19 @@
+Test 1:
+Settings: L2 Cache = 1kb, L3 Cache = 8MB
+Testfile: matmul_jki.out
+Simulation time = 0.310845
+
+Test 2:
+Settings: L2 Cache = 1kb, L3 Cache = Not present
+Testfile: matmul_jki.out
+Simulation time = 0.316381
+
+Test 3:
+Settings: L2 Cache = 1kb, L3 Cache = 8MB
+Testfile: matmul_ikj.out
+Simulation time = 0.310008
+
+Test 4:
+Settings: L2 Cache = 1kb, L3 Cache = Not present
+Testfile: matmul_ikj.out
+Simulation time = 0.313876
