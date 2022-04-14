@@ -549,7 +549,7 @@
             },
             "response_latency": 12,
             "sequential_access": false,
-            "size": 524288,
+            "size": 1024,
             "system": "system",
             "tag_latency": 12,
             "tags": {
@@ -570,7 +570,7 @@
                     "assoc": 8,
                     "entry_size": 64,
                     "eventq_index": 0,
-                    "size": 524288
+                    "size": 1024
                 },
                 "power_model": [],
                 "power_state": {
@@ -588,7 +588,7 @@
                 },
                 "replacement_policy": "system.l2cache.replacement_policy",
                 "sequential_access": false,
-                "size": 524288,
+                "size": 1024,
                 "system": "system",
                 "tag_latency": 12,
                 "warmup_percentage": 0
@@ -675,7 +675,7 @@
             "addr_ranges": [
                 "0:18446744073709551615"
             ],
-            "assoc": 8,
+            "assoc": 16,
             "clk_domain": "system.clk_domain",
             "clusivity": "mostly_incl",
             "compressor": null,
@@ -721,7 +721,7 @@
                 "cxx_class": "gem5::BaseSetAssoc",
                 "name": "tags",
                 "path": "system.l3cache.tags",
-                "assoc": 8,
+                "assoc": 16,
                 "block_size": 64,
                 "clk_domain": "system.clk_domain",
                 "entry_size": 64,
@@ -731,7 +731,7 @@
                     "cxx_class": "gem5::SetAssociative",
                     "name": "indexing_policy",
                     "path": "system.l3cache.tags.indexing_policy",
-                    "assoc": 8,
+                    "assoc": 16,
                     "entry_size": 64,
                     "eventq_index": 0,
                     "size": 8388608

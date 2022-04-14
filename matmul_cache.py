@@ -76,22 +76,28 @@ system.cpu.dcache.connectBus(system.l2bus)
 system.l2cache = L2Cache()
 system.l2cache.connectCPUSideBus(system.l2bus)
 
+x = 1
+
+if(x):
+
 #Create a memory bus, for L3 cache
-system.l3bus = L3XBar()
+    system.l3bus = L3XBar()
 
 #Hook up the L2 cache to the L3 cache bus
-system.l2cache.connectMemSideBus(system.l3bus)
+    system.l2cache.connectMemSideBus(system.l3bus)
 
 #Create an L3 acche and connect it to the l3 bus
-system.l3cache = L3Cache()
-system.l3cache.connectCPUSideBus(system.l3bus)
+    system.l3cache = L3Cache()
+    system.l3cache.connectCPUSideBus(system.l3bus)
 
 # Create a memory bus
 system.membus = SystemXBar()
 
+if(x):
 # Connect the L3 cache to the membus
-system.l3cache.connectMemSideBus(system.membus)
- 
+    system.l3cache.connectMemSideBus(system.membus)
+else:
+    system.l2cache.connectMemSideBus(system.membus)
 # Hook the CPU ports up to the membus
 #system.cpu.icache_port = system.membus.cpu_side_ports
 #system.cpu.dcache_port = system.membus.cpu_side_ports

@@ -108,7 +108,7 @@ class L2Cache(Cache):
     """Simple L2 Cache with default values"""
 
     # Default parameters
-    size = '512kB'
+    size = '1kB'
     assoc = 8
     tag_latency = 12
     data_latency = 12
@@ -134,8 +134,8 @@ class L3Cache(Cache):
     """Simple L3 Cache with default values"""
 
     # Default parameters
-    size = '9304kB'
-    assoc = 8
+    size = '8192kB'
+    assoc = 16
     tag_latency = 27
     data_latency = 27
     response_latency = 27
