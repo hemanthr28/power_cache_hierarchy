@@ -89,7 +89,7 @@ class L1DCache(L1Cache):
     """Simple L1 data cache with default values"""
 
     # Set the default size
-    size = '32kB'
+    size = '16kB'
 
     SimpleOpts.add_option('--l1d_size',
                           help="L1 data cache size. Default: %s" % size)
@@ -108,7 +108,7 @@ class L2Cache(Cache):
     """Simple L2 Cache with default values"""
 
     # Default parameters
-    size = '1kB'
+    size = '512kB'
     assoc = 8
     tag_latency = 12
     data_latency = 12
@@ -149,6 +149,32 @@ class L3Cache(Cache):
         if not opts or not opts.l3_size:
             return
         self.size = opts.l3_size
+
+    def connectCPUSideBus(self, bus):
+        self.cpu_side = bus.mem_side_ports
+
+    def connectMemSideBus(self, bus):
+        self.mem_side = bus.cpu_side_ports
+
+class L4Cache(Cache):
+    """Simple L4 Cache with default values"""
+
+    # Default parameters
+    size = '16384kB'
+    assoc = 16
+    tag_latency = 27
+    data_latency = 27
+    response_latency = 27
+    mshrs = 20
+    tgts_per_mshr = 12
+
+    SimpleOpts.add_option('--l4_size', help="L4 cache size. Default: %s" % size)
+
+    def __init__(self, opts=None):
+        super(L4Cache, self).__init__()
+        if not opts or not opts.l4_size:
+            return
+        self.size = opts.l4_size
 
     def connectCPUSideBus(self, bus):
         self.cpu_side = bus.mem_side_ports

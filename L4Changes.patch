@@ -195,7 +195,7 @@ index a424c6f01..40dda477e 100644
 +    snoop_response_latency = 1
 +    snoop_filter = SnoopFilter(lookup_latency = 0)
 +
-+class L4XBar(CoherentXbar):
++class L4XBar(CoherentXBar):
 +    width = 32
 +    frontend_latency = 1
 +    forward_latency = 0
