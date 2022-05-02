@@ -9,3 +9,5 @@ https://www.researchgate.net/profile/Iz-Reguly/publication/282439648_Benchmarkin
 http://www.cs.virginia.edu/stream/ref.html#runrules
 
 https://sites.utexas.edu/jdm4372/tag/stream-benchmark/
+
+http://www.cs.virginia.edu/stream/ref.html
