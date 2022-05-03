@@ -11,3 +11,5 @@ http://www.cs.virginia.edu/stream/ref.html#runrules
 https://sites.utexas.edu/jdm4372/tag/stream-benchmark/
 
 http://www.cs.virginia.edu/stream/ref.html
+
+https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.84.8929&rep=rep1&type=pdf#:~:text=For%20the%20largest%20data%20set,cache%20performance%20on%20overall%20performance.
