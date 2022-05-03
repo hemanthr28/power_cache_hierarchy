@@ -40,7 +40,7 @@ import m5
 # import all of the SimObjects
 from m5.objects import *
 #Add the common script to your path
-m5.util.addToPath('../gem5_workspace/gem5/configs')
+m5.util.addToPath('../../gem5_workspace/gem5/configs')
 # import the caches which we made
 from caches import *
 # create the system we are going to simulate
@@ -130,7 +130,7 @@ thispath = os.path.dirname(os.path.realpath(__file__))
 print (thispath)
 
 #binary = os.path.join(thispath, '../../tests/test-progs/matrix_multiply.out')
-binary = os.path.join(thispath, 'matmul_ikj.out')
+binary = os.path.join(thispath, '../radix_sort_50x100000.out')
 print (binary)
 
 system.workload = SEWorkload.init_compatible(binary)

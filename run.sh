@@ -1,1 +1,1 @@
-../gem5_workspace/gem5/build/POWER/gem5.opt -d stats2 matmul_cache.py
+../gem5_workspace/gem5/build/POWER/gem5.opt -d stats_50x10000 power8.py
