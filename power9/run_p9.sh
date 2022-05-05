@@ -1,1 +1,1 @@
-../../gem5_workspace/gem5/build/POWER/gem5.opt -d stats_radix_sort_50x100000 power9.py
+../../gem5_workspace/gem5/build/POWER/gem5.opt -d stats_128mb power9.py

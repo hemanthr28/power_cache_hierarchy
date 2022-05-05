@@ -134,7 +134,7 @@ class L3Cache(Cache):
     """Simple L3 Cache with default values"""
 
     # Default parameters
-    size = '16384kB'
+    size = '131072kB'
     assoc = 16
     tag_latency = 37
     data_latency = 37
