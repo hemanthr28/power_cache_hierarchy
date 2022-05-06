@@ -14,6 +14,7 @@
         "cxx_class": "gem5::System",
         "name": "system",
         "path": "system",
+        "auto_unlink_shared_backstore": false,
         "cache_line_size": 64,
         "eventq_index": 0,
         "exit_on_work_items": false,
@@ -74,7 +75,7 @@
             }
         },
         "cpu": {
-            "type": "TimingSimpleCPU",
+            "type": "BaseTimingSimpleCPU",
             "cxx_class": "gem5::TimingSimpleCPU",
             "name": "cpu",
             "path": "system.cpu",
@@ -185,9 +186,9 @@
                     "name": "workload",
                     "path": "system.cpu.workload",
                     "cmd": [
-                        "/home/ugrads/nonmajors/sairamg/L3Cache_gem5/radix_sort_50x10000.out"
+                        "/home/ugrads/nonmajors/hemanthr/power8/radix_sort_5x1000.out"
                     ],
-                    "cwd": "/home/ugrads/nonmajors/sairamg/L3Cache_gem5",
+                    "cwd": "/home/ugrads/nonmajors/hemanthr/power8",
                     "drivers": [],
                     "egid": 100,
                     "env": [],
