@@ -118,7 +118,7 @@ if m5.defines.buildEnv['TARGET_ISA'] == "x86":
 
 # Create a DDR3 memory controller and connect it to the membus
 system.mem_ctrl = MemCtrl()
-system.mem_ctrl.dram = LPDDR3_1600_1x32()
+system.mem_ctrl.dram = HMC_2500_1x32()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
@@ -134,11 +134,9 @@ thispath = os.path.dirname(os.path.realpath(__file__))
 print (thispath)
 
 #binary = os.path.join(thispath, '../../tests/test-progs/matrix_multiply.out')
-<<<<<<< HEAD
+
 binary = os.path.join(thispath, 'radix_sort_100x10000.out')
-=======
-binary = os.path.join(thispath, 'radix_sort_5x100000.out')
->>>>>>> 894b6671f740dc73e83953703b9db5e1efec76b0
+
 print (binary)
 
 system.workload = SEWorkload.init_compatible(binary)

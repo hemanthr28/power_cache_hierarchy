@@ -52,7 +52,6 @@ class L1Cache(Cache):
     response_latency = 4
     mshrs = 4
     tgts_per_mshr = 20
-    blockSize = 16
 
     def __init__(self, options=None):
         super(L1Cache, self).__init__()
@@ -72,12 +71,10 @@ class L1ICache(L1Cache):
 
     # Set the default size
     size = '1kB'
-    cacheline_size = 16
 
     SimpleOpts.add_option('--l1i_size',
                           help="L1 instruction cache size. Default: %s" % size)
-    #SimpleOpts.add_option('--cacheline_size',
-     #                     help="L1 instruction cache size. Default: %s" % cacheline_size)
+
     def __init__(self, opts=None):
         super(L1ICache, self).__init__(opts)
         if not opts or not opts.l1i_size:
@@ -93,12 +90,9 @@ class L1DCache(L1Cache):
 
     # Set the default size
     size = '2kB'
-    cacheline_size = 16
 
     SimpleOpts.add_option('--l1d_size',
                           help="L1 data cache size. Default: %s" % size)
-    #SimpleOpts.add_option('--cacheline_size',
-     #                     help="L1 instruction cache size. Default: %s" % cacheline_size)
 
     def __init__(self, opts=None):
         super(L1DCache, self).__init__(opts)
@@ -123,10 +117,6 @@ class L2Cache(Cache):
     tgts_per_mshr = 12
 
     SimpleOpts.add_option('--l2_size', help="L2 cache size. Default: %s" % size)
-    
-    blockSize = 16
-    #SimpleOpts.add_option('--cacheline_size',
-     #                     help="L1 instruction cache size. Default: %s" % cacheline_size)
 
     def __init__(self, opts=None):
         super(L2Cache, self).__init__()
@@ -144,7 +134,7 @@ class L3Cache(Cache):
     """Simple L3 Cache with default values"""
 
     # Default parameters
-    size = '4096kB'
+    size = '2048kB'
     assoc = 8
     tag_latency = 37
     data_latency = 37
@@ -153,11 +143,6 @@ class L3Cache(Cache):
     tgts_per_mshr = 12
 
     SimpleOpts.add_option('--l3_size', help="L3 cache size. Default: %s" % size)
-    
-    blockSize = 16
-    #SimpleOpts.add_option('--cacheline_size',
-     #                     help="L1 instruction cache size. Default: %s" % cacheline_size)
-
 
     def __init__(self, opts=None):
         super(L3Cache, self).__init__()
@@ -182,13 +167,8 @@ class L4Cache(Cache):
     response_latency = 27
     mshrs = 20
     tgts_per_mshr = 12
-  
-    SimpleOpts.add_option('--l4_size', help="L4 cache size. Default: %s" % size)
-    
-    blockSize = 16
-    #SimpleOpts.add_option('--cacheline_size',
-     #                     help="L1 instruction cache size. Default: %s" % cacheline_size)
 
+    SimpleOpts.add_option('--l4_size', help="L4 cache size. Default: %s" % size)
 
     def __init__(self, opts=None):
         super(L4Cache, self).__init__()
