@@ -1,0 +1,10 @@
+
+system.l3cache.overallHits::total              910085                       # number of overall hits (Count)
+
+system.l3cache.overallMisses::total            800669                       # number of overall misses (Count)
+
+system.l3cache.overallMissLatency::total  89855793000                       # number of overall miss ticks (Tick)
+
+system.l3cache.overallAccesses::total         1710754                       # number of overall (read+write) accesses (Count)
+
+system.l3cache.replacements                    801175                       # number of replacements (Count)
