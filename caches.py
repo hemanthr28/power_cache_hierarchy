@@ -72,7 +72,10 @@ class L1ICache(L1Cache):
 
     # Set the default size
     size = '1kB'
+<<<<<<< HEAD
     cacheline_size = 16
+=======
+>>>>>>> b59a138c9f6adad0bfc681b2a75831ef87013f32
 
     SimpleOpts.add_option('--l1i_size',
                           help="L1 instruction cache size. Default: %s" % size)
@@ -93,7 +96,10 @@ class L1DCache(L1Cache):
 
     # Set the default size
     size = '2kB'
+<<<<<<< HEAD
     cacheline_size = 16
+=======
+>>>>>>> b59a138c9f6adad0bfc681b2a75831ef87013f32
 
     SimpleOpts.add_option('--l1d_size',
                           help="L1 data cache size. Default: %s" % size)
