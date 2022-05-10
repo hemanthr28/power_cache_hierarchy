@@ -14,7 +14,6 @@
         "cxx_class": "gem5::System",
         "name": "system",
         "path": "system",
-        "auto_unlink_shared_backstore": false,
         "cache_line_size": 64,
         "eventq_index": 0,
         "exit_on_work_items": false,
@@ -75,7 +74,7 @@
             }
         },
         "cpu": {
-            "type": "BaseTimingSimpleCPU",
+            "type": "TimingSimpleCPU",
             "cxx_class": "gem5::TimingSimpleCPU",
             "name": "cpu",
             "path": "system.cpu",
@@ -186,9 +185,9 @@
                     "name": "workload",
                     "path": "system.cpu.workload",
                     "cmd": [
-                        "/home/ugrads/nonmajors/hemanthr/power8/power9/../radix_sort_100x10000.out"
+                        "/home/ugrads/nonmajors/sairamg/L3Cache_gem5/power9/radix_sort_100x10000.out"
                     ],
-                    "cwd": "/home/ugrads/nonmajors/hemanthr/power8/power9",
+                    "cwd": "/home/ugrads/nonmajors/sairamg/L3Cache_gem5/power9",
                     "drivers": [],
                     "egid": 100,
                     "env": [],
@@ -676,7 +675,7 @@
             "addr_ranges": [
                 "0:18446744073709551615"
             ],
-            "assoc": 2,
+            "assoc": 8,
             "clk_domain": "system.clk_domain",
             "clusivity": "mostly_incl",
             "compressor": null,
@@ -722,7 +721,7 @@
                 "cxx_class": "gem5::BaseSetAssoc",
                 "name": "tags",
                 "path": "system.l3cache.tags",
-                "assoc": 2,
+                "assoc": 8,
                 "block_size": 64,
                 "clk_domain": "system.clk_domain",
                 "entry_size": 64,
@@ -732,7 +731,7 @@
                     "cxx_class": "gem5::SetAssociative",
                     "name": "indexing_policy",
                     "path": "system.l3cache.tags.indexing_policy",
-                    "assoc": 2,
+                    "assoc": 8,
                     "entry_size": 64,
                     "eventq_index": 0,
                     "size": 4194304

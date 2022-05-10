@@ -135,7 +135,11 @@ class L3Cache(Cache):
 
     # Default parameters
     size = '4096kB'
+<<<<<<< HEAD
+    assoc = 16
+=======
     assoc = 2
+>>>>>>> b59a138c9f6adad0bfc681b2a75831ef87013f32
     tag_latency = 37
     data_latency = 37
     response_latency = 37

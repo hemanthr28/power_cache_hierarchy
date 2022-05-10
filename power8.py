@@ -118,7 +118,7 @@ if m5.defines.buildEnv['TARGET_ISA'] == "x86":
 
 # Create a DDR3 memory controller and connect it to the membus
 system.mem_ctrl = MemCtrl()
-system.mem_ctrl.dram = LPDDR3_1600_1x32()
+system.mem_ctrl.dram = HMC_2500_1x32()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
