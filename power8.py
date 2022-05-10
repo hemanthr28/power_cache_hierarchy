@@ -135,7 +135,7 @@ print (thispath)
 
 #binary = os.path.join(thispath, '../../tests/test-progs/matrix_multiply.out')
 
-binary = os.path.join(thispath, 'radix_sort_100x10000.out')
+binary = os.path.join(thispath, 'Benchmark_binaries/radix_sort_100x1000000.out')
 
 print (binary)
 
