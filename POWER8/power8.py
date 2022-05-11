@@ -40,7 +40,7 @@ import m5
 # import all of the SimObjects
 from m5.objects import *
 #Add the common script to your path
-m5.util.addToPath('../gem5_workspace/gem5/configs')
+m5.util.addToPath('../../gem5_workspace/gem5/configs')
 # import the caches which we made
 from caches import *
 # create the system we are going to simulate
@@ -118,7 +118,7 @@ if m5.defines.buildEnv['TARGET_ISA'] == "x86":
 
 # Create a DDR3 memory controller and connect it to the membus
 system.mem_ctrl = MemCtrl()
-system.mem_ctrl.dram = HMC_2500_1x32()
+system.mem_ctrl.dram = LPDDR3_1600_1x32()
 system.mem_ctrl.dram.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.mem_side_ports
 
@@ -134,9 +134,7 @@ thispath = os.path.dirname(os.path.realpath(__file__))
 print (thispath)
 
 #binary = os.path.join(thispath, '../../tests/test-progs/matrix_multiply.out')
-
-binary = os.path.join(thispath, 'Benchmark_binaries/radix_sort_100x1000000.out')
-
+binary = os.path.join(thispath, '../Benchmark_binaries/radix_sort_100x100000.out')
 print (binary)
 
 system.workload = SEWorkload.init_compatible(binary)

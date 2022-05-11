@@ -36,7 +36,7 @@ import m5
 from m5.objects import Cache
 
 # Add the common scripts to our path
-m5.util.addToPath('../gem5_workspace/gem5/configs')
+m5.util.addToPath('../../gem5_workspace/gem5/configs')
 
 from common import SimpleOpts
 
@@ -70,7 +70,7 @@ class L1ICache(L1Cache):
     """Simple L1 instruction cache with default values"""
 
     # Set the default size
-    size = '1kB'
+    size = '32kB'
 
     SimpleOpts.add_option('--l1i_size',
                           help="L1 instruction cache size. Default: %s" % size)
@@ -89,7 +89,7 @@ class L1DCache(L1Cache):
     """Simple L1 data cache with default values"""
 
     # Set the default size
-    size = '1kB'
+    size = '32kB'
 
     SimpleOpts.add_option('--l1d_size',
                           help="L1 data cache size. Default: %s" % size)
@@ -108,7 +108,7 @@ class L2Cache(Cache):
     """Simple L2 Cache with default values"""
 
     # Default parameters
-    size = '16kB'
+    size = '512kB'
     assoc = 8
     tag_latency = 16
     data_latency = 16
@@ -134,12 +134,8 @@ class L3Cache(Cache):
     """Simple L3 Cache with default values"""
 
     # Default parameters
-    size = '4096kB'
-<<<<<<< HEAD
+    size = '131072kB'
     assoc = 16
-=======
-    assoc = 2
->>>>>>> b59a138c9f6adad0bfc681b2a75831ef87013f32
     tag_latency = 37
     data_latency = 37
     response_latency = 37
