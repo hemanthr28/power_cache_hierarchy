@@ -1,13 +1,6 @@
-This repo is organized as follows. 
+Repo organization and the descriptions of all the files/folders is as follows. 
 
-Directory POWER8/ has POWER 8 architecture configuration files, evaluation results and script to run the simulation. 
-Directory POWER8/ has POWER 9 architecture configuration files, evaluation results and script to run the simulation.
-Directory Benchmark_binaries/ has all the cross compiled binaries of the radix sort benchmark for various 2-D array dimensions. 
-Directoty Benchmark_source/ has the source code of the radix sort and multiplication benchmark used in our work. 
-File Level3Cache.patch has the gem5 configuration changes for simulating POWER architecture with only level 3 caches. 
-File Level4Cache.patch has the gem5 configuration changes for simulating POWER architecture with level 3 and level 4caches.
-
-This Repo
+power_cache_hierarchy/ -> This repo
     -Benchmark_binaries/ -> has all the cross compiled binaries of the radix sort benchmark for various 2-D array dimensions.
         -radix_sort_100000x100000.out -> cross compiled binary
         -radix_sort_100x1000.out -> cross compiled binary
