@@ -28,4 +28,4 @@
     -**backup_files**/ -> backup files (just for our use)
     -**ReadMe.md** -> read me file
     -**Level3Cache.patch** -> has the gem5 configuration changes for simulating POWER architecture with only level 3 caches.
-    -**Level4Cache.patch** -> has the gem5 configuration changes for simulating POWER architecture with level 3 and level 4caches.
+    -**Level4Cache.patch** -> has the gem5 configuration changes for simulating POWER architecture with level 3 and level 4caches. 
