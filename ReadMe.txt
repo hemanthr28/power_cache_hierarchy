@@ -26,7 +26,8 @@ power_cache_hierarchy/ -> This repo
         -power9.py -> conatains the POWER9 system design with level 9 cache hierarchy. 
         -run_p9.sh -> script to run simulations.
     -backup_files/ -> backup files (just for our use)
-    -ReadMe.md -> read me file
+    -ReadMe.md -> read me file.
+    -Final_report.pdf -> Write up of our project.
     -Level3Cache.patch -> has the gem5 configuration changes for simulating POWER architecture with only level 3 caches.
     -Level4Cache.patch -> has the gem5 configuration changes for simulating POWER architecture with level 3 and level 4caches. 
     -build_power.sh -> bash script to build gem5. 
