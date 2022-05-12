@@ -47,10 +47,14 @@ Steps:
     
 Below are the steps to build benchmark.
 This step needs a x86 machine with Powerpc64 cross compiler. 
-    1. Install the cross compiler using - sudo apt install gcc-powerpc64-linux-gnu
-    2. Navigate to Benchmark_source/ directory, edit the ROW and COL parametrs in radix_sort.c s needed. 
-    3. Build the binary by running - powerpc64-linux-gnu-gcc -O0 -ggdb3 -std=c99 -static radix_sort.c -o radix_sort.out
-    4. Once the build is successful, transfer the binary to the machine running gem5 simulator. 
+    1. Clone a fresh copy of the gem5 repo from git clone https://gem5.googlesource.com/public/gem5 
+    2. Apply the included patch files - L3Changes.patch and L4Changes.patch to make appropriate changes to the source files.
+    3. Build the POWER ISA using scons
+    4. The run scripts use the relative paths as "../gem5_workspace/gem5/*" so, place the provided scripts in appropriate relative paths.  
+    5. Install the cross compiler using - sudo apt install gcc-powerpc64-linux-gnu
+    6. Navigate to Benchmark_source/ directory, edit the ROW and COL parametrs in radix_sort.c s needed. 
+    7. Build the binary by running - powerpc64-linux-gnu-gcc -O0 -ggdb3 -std=c99 -static radix_sort.c -o radix_sort.out
+    8. Once the build is successful, transfer the binary to the machine running gem5 simulator. 
     
 
     
